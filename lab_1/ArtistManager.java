@@ -25,7 +25,7 @@ class Artist {
     };
   }
 
-  String name;
+  StringBuffer name;
   Genre genre;
   Song[] songs;
 
@@ -34,14 +34,26 @@ class Artist {
   }
 
   // Parameterized Constructor
-  Artist(String name, String genre, Song[] songs) {
+  Artist(StringBuffer name, String genre, Song[] songs) {
     this.name = name;
     this.genre = string_to_genre(genre);
     this.songs = songs;
   }
 
-  void changeName(String newName) {
+  void changeName(StringBuffer newName) {
     this.name = newName;
+  }
+
+  // using the replace function
+  void replaceFirstName(StringBuffer newFirstName) {
+    int whiteIndex;
+    for (int i = 0 ; i < newFirstName.length() ; i++) {
+      if (newFirstName.charAt(i) == ' ') {
+        whiteIndex = i;
+        break;
+      }
+    }
+    this.name.replace(0, whiteIndex, newFirstName);
   }
 
   void changeGenre(String newGenre) {
@@ -84,27 +96,27 @@ class Song {
 class ArtistManager {
   public static void main(String[] args) {
     Artist[] artists = new Artist[5];
-    artists[0] = new Artist("Arden Diago", "Pop", new Song[] {
+    artists[0] = new Artist(new StringBuffer("Arden Diago"), "Pop", new Song[] {
         new Song("Random", 230),
         new Song("Hello World", 210)
     });
 
-    artists[1] = new Artist("Kartik Dewnani", "Rock", new Song[] {
+    artists[1] = new Artist(new StringBuffer("Kartik Dewnani"), "Rock", new Song[] {
         new Song("Saiyaara", 354),
         new Song("Why why why?", 165)
     });
 
-    artists[2] = new Artist("Shubham Swaraj", "Electronic", new Song[] {
+    artists[2] = new Artist(new StringBuffer("Shumbham Swaraj"), "Electronic", new Song[] {
         new Song("One More ", 320),
         new Song("Get Lucky", 248)
     });
 
-    artists[3] = new Artist("Manasa", "Jazz", new Song[] {
+    artists[3] = new Artist(new StringBuffer("Manasa"), "Jazz", new Song[] {
         new Song("So What", 545),
         new Song("Freddie Freeloader", 580)
     });
 
-    artists[4] = new Artist("Darshan Heble", "Dance", new Song[] {
+    artists[4] = new Artist(new StringBuffer("Darshan Heble"), "Dance", new Song[] {
         new Song("Summer", 230),
         new Song("Feel So Close", 240)
     });
@@ -112,6 +124,7 @@ class ArtistManager {
 
     String nameOfFive = artists[4].name;
     System.out.println("\nThe name of the fifth artist is " + nameOfFive);
+    artists[4].replaceFirstName("Darshana");
 
     Artist.Genre genreOfSecond = artists[0].genre;
     System.out.println("\nThe genre of the second artist is " + Artist.genre_to_string(genreOfSecond));
