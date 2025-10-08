@@ -20,7 +20,7 @@ class Artist {
     this.earnings = earnings;
   }
 
-  Artist(String name, String username, String password, double earnings) {
+  public Artist(String name, String username, String password, double earnings) {
     this.name = name;
     this.username = username;
     setPassword(password);
