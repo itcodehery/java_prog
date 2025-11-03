@@ -1,3 +1,4 @@
 .gradle
 .project
 gradle_project/
+.settings
