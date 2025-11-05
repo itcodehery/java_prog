@@ -46,14 +46,15 @@ class Artist {
 
   // using the replace function
   void replaceFirstName(StringBuffer newFirstName) {
-    int whiteIndex;
-    for (int i = 0 ; i < newFirstName.length() ; i++) {
-      if (newFirstName.charAt(i) == ' ') {
+    int whiteIndex = 0;
+    for (int i = 0; i < name.length(); i++) {
+      System.out.println(name.charAt(i));
+      if (name.charAt(i) == ' ') {
         whiteIndex = i;
         break;
       }
     }
-    this.name.replace(0, whiteIndex, newFirstName);
+    this.name.replace(0, whiteIndex, newFirstName.toString());
   }
 
   void changeGenre(String newGenre) {
@@ -122,9 +123,9 @@ class ArtistManager {
     });
     artists[2].display();
 
-    String nameOfFive = artists[4].name;
+    String nameOfFive = artists[4].name.toString();
     System.out.println("\nThe name of the fifth artist is " + nameOfFive);
-    artists[4].replaceFirstName("Darshana");
+    artists[4].replaceFirstName(new StringBuffer("Darshana"));
 
     Artist.Genre genreOfSecond = artists[0].genre;
     System.out.println("\nThe genre of the second artist is " + Artist.genre_to_string(genreOfSecond));

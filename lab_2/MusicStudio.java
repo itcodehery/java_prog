@@ -27,25 +27,24 @@ public class MusicStudio {
 
         System.out.println("--- Demonstrating Access Modifiers in a Music Studio ---");
 
-        // 1. Accessing public members 
         System.out.println("\n1. Accessing PUBLIC members:");
         System.out.println("   - Accessing public variable 'trackTitle': " + track.trackTitle);
         System.out.print("   - Calling public method 'showTitle()': ");
         track.showTitle();
 
-        // 2. Accessing default members 
         System.out.println("\n2. Accessing DEFAULT members:");
         System.out.println("   - Accessing default variable 'trackBPM': " + track.trackBPM);
         System.out.print("   - Calling default method 'showBPM()': ");
         track.showBPM();
 
-        // 3. Accessing private members 
         System.out.println("\n3. Trying to access PRIVATE members:");
         System.out.println("   - The following lines are commented out because they would cause a compilation error.");
-        System.out.println("   - Private members ('trackLyrics' and 'showLyrics()') are only accessible within the 'MusicTrack' class.\n");
+        System.out.println(
+                "   - Private members ('trackLyrics' and 'showLyrics()') are only accessible within the 'MusicTrack' class.\n");
 
         // The commented lines here will cause an error:
-        // System.out.println("Accessing private variable 'trackLyrics': " + track.trackLyrics);
+        // System.out.println("Accessing private variable 'trackLyrics': " +
+        // track.trackLyrics);
         // track.showLyrics();
     }
 }
