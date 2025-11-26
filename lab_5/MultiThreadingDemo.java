@@ -1,5 +1,3 @@
-// A Music Studio themed demonstration of multi-threading concepts.
-
 class RecordingStudio {
     private String track;
     private boolean isAvailableForRecording = true;
@@ -17,7 +15,6 @@ class RecordingStudio {
 
         System.out.println("Sound Engineer is mixing: '" + track + "'");
 
-        // After mixing, the studio becomes available for recording again.
         isAvailableForRecording = true;
         notifyAll(); 
         return track;
@@ -27,25 +24,21 @@ class RecordingStudio {
         while (!isAvailableForRecording) {
             try {
                 System.out.println("Musician is waiting for the studio to be free.");
-                wait(); // Releases the lock and waits for the engineer to finish mixing
+                wait(); 
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
                 System.err.println("Musician thread interrupted.");
             }
         }
 
-        // The studio is available. The musician can record.
         this.track = track;
         System.out.println("Musician has recorded: '" + track + "'");
 
-        // After recording, the studio is no longer available for recording until the
-        // track is mixed.
         isAvailableForRecording = false;
-        notifyAll(); // Notify the waiting sound engineer that there is a new track.
+        notifyAll(); 
     }
 }
 
-// The Musician thread, which produces tracks.
 class Musician extends Thread {
     private final RecordingStudio studio;
     private final String[] tracksToRecord = {
@@ -53,7 +46,7 @@ class Musician extends Thread {
             "Guitar Riff",
             "Bass Line",
             "Drum Beat",
-            "Session Finished" // Sentinel value to end the session
+            "Session Finished" 
     };
 
     public Musician(RecordingStudio studio) {
@@ -65,7 +58,6 @@ class Musician extends Thread {
         for (String track : tracksToRecord) {
             studio.recordTrack(track);
             try {
-                // Simulate time taken to prepare for the next recording
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
@@ -75,7 +67,6 @@ class Musician extends Thread {
     }
 }
 
-// The SoundEngineer, which consumes and processes tracks.
 class SoundEngineer implements Runnable {
     private final RecordingStudio studio;
 
@@ -87,18 +78,15 @@ class SoundEngineer implements Runnable {
     public void run() {
         for (String track = studio.mixTrack(); !track.equals("Session Finished"); track = studio.mixTrack()) {
             try {
-                // Simulate time to mix the track
                 Thread.sleep(1500);
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
                 System.err.println("Sound Engineer thread interrupted during mixing.");
             }
         }
-        // The loop terminates after "Session Finished" is received from mixTrack().
     }
 }
 
-// Main class to run the music studio demo
 public class MultiThreadingDemo {
     public static void main(String[] args) {
         System.out.println("Music Studio session starting.");

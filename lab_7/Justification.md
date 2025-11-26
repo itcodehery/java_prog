@@ -1,0 +1,7 @@
+# Justification for Collection Choices in Music Studio Domain
+
+In this music studio management system, the selection of Java Collections was based on the specific operational needs of the domain. An **`ArrayList`** was chosen for the `trackCatalog` because it serves as the primary, ordered record of all tracks in the studio's library. This mirrors a real-world catalog where the order of addition might be relevant and iteration over the entire collection is a frequent operation (e.g., for calculating total library duration or displaying all tracks). `ArrayList` provides efficient iteration and fast, index-based access, which is crucial for a scalable application where one might need to retrieve a specific track by its position.
+
+To manage the list of genres, a simple **`ArrayList`** is used for `uniqueGenres`. Before adding a new genre, we perform a manual check using the `.contains()` method to ensure it doesn't already exist in the list. While a `HashSet` is more efficient for guaranteeing uniqueness, this approach is simpler to understand and sufficient for cases where the number of unique genres is small and the performance cost of the check is not a concern.
+
+When searching for tracks by a specific artist, we now iterate through the entire `trackCatalog` and manually filter the tracks. This approach, while less efficient than using a `HashMap` for lookups (as it involves O(n) time complexity for each search), aligns with the goal of using simpler collection types and avoiding more complex data structures.
