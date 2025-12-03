@@ -2,18 +2,17 @@ import java.util.List;
 
 public class DomainDataAnalyzer {
     public static void main(String[] args) {
-        
+
         DataSet<Integer> songLengths = new DataSet<>();
-        songLengths.add(185); 
-        songLengths.add(220); 
-        songLengths.add(170); 
-        songLengths.add(300); 
-        songLengths.add(245); 
+        songLengths.add(185);
+        songLengths.add(220);
+        songLengths.add(170);
+        songLengths.add(300);
+        songLengths.add(245);
 
         System.out.println("----- Music Studio Analytics: Album Track Lengths -----");
         System.out.println("Track Lengths (seconds): " + songLengths.getData());
 
-        // Gets the total length of the songs in dataset
         Analysis<Integer> totalLength = data -> {
             int sum = 0;
             for (Integer val : data) {
@@ -22,9 +21,9 @@ public class DomainDataAnalyzer {
             return sum;
         };
 
-        // Gets the average length of the songs in dataset
         Analysis<Integer> averageLength = data -> {
-            if (data.isEmpty()) return 0;
+            if (data.isEmpty())
+                return 0;
             int sum = 0;
             for (Integer val : data) {
                 sum += val;
@@ -32,7 +31,6 @@ public class DomainDataAnalyzer {
             return (double) sum / data.size();
         };
 
-        // Get the length of the longest track
         Analysis<Integer> longestTrack = data -> {
             Integer max = Integer.MIN_VALUE;
             for (Integer val : data) {
@@ -44,11 +42,11 @@ public class DomainDataAnalyzer {
         };
 
         System.out.println("Total Album Duration (seconds): " + songLengths.calculate(totalLength));
-        System.out.println("Average Track Duration (seconds): " + String.format("%.2f", songLengths.calculate(averageLength)));
+        System.out.println(
+                "Average Track Duration (seconds): " + String.format("%.2f", songLengths.calculate(averageLength)));
         System.out.println("Longest Track (seconds): " + songLengths.calculate(longestTrack));
         System.out.println();
 
-        
         DataSet<Integer> trackBPMs = new DataSet<>();
         trackBPMs.add(120);
         trackBPMs.add(128);
@@ -60,7 +58,8 @@ public class DomainDataAnalyzer {
         System.out.println("Track BPMs: " + trackBPMs.getData());
 
         Analysis<Integer> averageBPM = data -> {
-            if (data.isEmpty()) return 0;
+            if (data.isEmpty())
+                return 0;
             int sum = 0;
             for (Integer val : data) {
                 sum += val;
@@ -95,9 +94,10 @@ public class DomainDataAnalyzer {
 
         System.out.println("----- Domain-Specific Evaluation -----");
         Evaluation<Integer> areTracksSimilarLength = (len1, len2) -> Math.abs(len1 - len2) <= 15;
-        
+
         Integer track1 = songLengths.getData().get(0);
         Integer track2 = songLengths.getData().get(2);
-        System.out.println("Are Track 1 (" + track1 + "s) and Track 3 (" + track2 + "s) similar in length? " + areTracksSimilarLength.evaluate(track1, track2));
+        System.out.println("Are Track 1 (" + track1 + "s) and Track 3 (" + track2 + "s) similar in length? "
+                + areTracksSimilarLength.evaluate(track1, track2));
     }
 }

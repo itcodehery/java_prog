@@ -49,7 +49,6 @@ class MusicStudioManager {
   public void addTrack(Track track) {
     trackCatalog.add(track);
 
-    // Manually ensure genre is unique before adding
     if (!uniqueGenres.contains(track.getGenre())) {
       uniqueGenres.add(track.getGenre());
     }
